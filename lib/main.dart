@@ -1,13 +1,12 @@
 import 'package:flutter/foundation.dart';
 
-import 'package:hive/hive.dart';
-
 import 'package:s5_demo_app/app.dart';
+import 'package:s5_demo_app/view/file_system.dart';
 import 'package:s5_demo_app/view/stream.dart';
 
 void main() async {
   if (!kIsWeb) {
-    Hive.init('data/hive');
+    S5.initDataPath('data/hive');
   }
   s5 = await S5.create(
     databaseEncryptionKey: Uint8List(32),
@@ -40,6 +39,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final pages = const [
     BottomNavigationBarItem(
+      icon: Icon(Icons.folder_open),
+      label: 'File System',
+    ),
+    BottomNavigationBarItem(
       icon: Icon(Icons.rss_feed),
       label: 'E2EE Message Streams',
     ),
@@ -49,12 +52,14 @@ class _HomePageState extends State<HomePage> {
     ),
   ];
 
-  int index = 0;
+  int index = 1;
 
   @override
   Widget build(BuildContext context) {
     final Widget currentPage;
     if (index == 0) {
+      currentPage = const FileSystemView();
+    } else if (index == 1) {
       currentPage = const StreamView();
     } else {
       currentPage = Center(

@@ -20,7 +20,7 @@ class _StreamViewState extends State<StreamView> {
     super.initState();
   }
 
-  final tsOffset = 1706913965000;
+  final tsOffset = 1714688000000;
 
   @override
   void dispose() {
@@ -29,7 +29,7 @@ class _StreamViewState extends State<StreamView> {
   }
 
   final ctrl = TextEditingController(
-    text: 'example_key',
+    text: 'example_stream_key',
   );
 
   final chatCtrl = TextEditingController();
